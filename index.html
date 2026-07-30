@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stream Control — Boshqaruv Markazi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="shell">
+
+    <!-- ================= SIDENAV ================= -->
+    <nav class="sidenav">
+      <div class="sidenav-brand">
+        <div class="brand-mark">⚡</div>
+        <div class="brand-text">
+          <div class="brand-title">STREAM<span>CONTROL</span></div>
+        </div>
+      </div>
+
+      <div class="sidenav-list" id="sidenav-list">
+        <button class="nav-item active" data-page="overview">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span><span>Overview</span>
+        </button>
+        <button class="nav-item" data-page="kanallar">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg></span><span>Kanallar</span>
+          <span class="nav-badge" id="nav-channel-count">15</span>
+        </button>
+        <button class="nav-item" data-page="live">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-8.49a6 6 0 0 0 0 8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></span><span>Live Streamlar</span>
+        </button>
+        <button class="nav-item" data-page="videolar">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></span><span>Videolar</span>
+        </button>
+        <button class="nav-item" data-page="analytics">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Analytics</span>
+        </button>
+        <button class="nav-item" data-page="playlistlar">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></span><span>Playlistlar</span>
+        </button>
+        <button class="nav-item" data-page="saqlash">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span><span>Saqlash</span>
+        </button>
+        <button class="nav-item" data-page="daromad">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span>Daromad</span>
+        </button>
+        <button class="nav-item" data-page="sozlamalar">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span><span>Sozlamalar</span>
+        </button>
+        <button class="nav-item" data-page="foydalanuvchilar">
+          <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span>Foydalanuvchilar</span>
+        </button>
+      </div>
+
+      <div class="sidenav-bottom">
+        <div class="mini-storage">
+          <div class="mini-storage-head">
+            <span>SAQLASH HOLATI</span>
+          </div>
+          <div class="mini-storage-value" id="sidebar-storage-label">0 GB / 750 GB</div>
+          <div class="vu-meter thin"><div id="sidebar-storage-bar" class="vu-meter-fill"></div></div>
+        </div>
+        <div class="pro-card">
+          <button class="pro-close" type="button" aria-label="Yopish">✕</button>
+          <div class="pro-crown">👑</div>
+          <div class="pro-title">Pro rejaga o'ting</div>
+          <div class="pro-sub">Cheksiz saqlash, ko'proq imkoniyatlar</div>
+          <button class="btn btn-primary btn-block">Reja tanlash</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ================= MAIN COLUMN ================= -->
+    <div class="main-col">
+
+      <header class="topbar">
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menyu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="topbar-title">
+          <h1 id="page-title">Boshqaruv Markazi</h1>
+          <div class="topbar-sub" id="page-subtitle">15 ta kanal boshqaruvi</div>
+        </div>
+        <div class="topbar-search">
+          <span class="search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+          <input type="text" placeholder="Kanal, video yoki stream key qidirish…" id="global-search">
+          <span class="search-kbd">⌘K</span>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn-round" title="Bildirishnomalar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="dot-badge"></span></button>
+          <button class="icon-btn-round" title="Yordam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></button>
+          <div class="admin-chip">
+            <div class="admin-avatar">👤</div>
+            <div class="admin-info">
+              <div class="admin-name">Admin</div>
+              <div class="admin-role">Super Admin</div>
+            </div>
+            <span class="chev">▾</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-container" id="page-container">
+
+        <!-- ============ OVERVIEW PAGE ============ -->
+        <section class="page active" id="page-overview">
+
+          <div class="stats-row-heading">
+            <span class="stats-row-heading-icon">📊</span>
+            <span>Statistika: <b id="stats-channel-name">Kanal 1</b></span>
+          </div>
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon icon-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-8.49a6 6 0 0 0 0 8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></span>
+                <span class="stat-trend" id="stat-live-trend">—</span>
+              </div>
+              <div class="stat-card-label">EFIR HOLATI</div>
+              <div class="stat-card-value" id="stat-live">OFFLINE</div>
+              <div class="sparkline sl-red"><svg class="sparkline-svg" viewBox="0 0 100 24" preserveAspectRatio="none"><polyline points="0,20 10,17 20,19 30,12 40,15 50,8 60,11 70,6 80,9 90,4 100,7" fill="none" stroke="#f0454f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon icon-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                <span class="stat-trend up">—</span>
+              </div>
+              <div class="stat-card-label">JONLI TOMOSHA</div>
+              <div class="stat-card-value" id="stat-viewers">—</div>
+              <div class="sparkline sl-blue"><svg class="sparkline-svg" viewBox="0 0 100 24" preserveAspectRatio="none"><polyline points="0,15 10,16 20,12 30,14 40,9 50,11 60,7 70,10 80,5 90,8 100,3" fill="none" stroke="#4f8ef7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon icon-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                <span class="stat-trend up">—</span>
+              </div>
+              <div class="stat-card-label">KO'RISHLAR (BUGUN)</div>
+              <div class="stat-card-value" id="stat-views-today">—</div>
+              <div class="sparkline sl-green"><svg class="sparkline-svg" viewBox="0 0 100 24" preserveAspectRatio="none"><polyline points="0,18 10,14 20,16 30,10 40,12 50,6 60,9 70,4 80,7 90,2 100,5" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+                <span class="stat-trend up">—</span>
+              </div>
+              <div class="stat-card-label">O'RTACHA CTR</div>
+              <div class="stat-card-value" id="stat-ctr">—</div>
+              <div class="sparkline sl-orange"><svg class="sparkline-svg" viewBox="0 0 100 24" preserveAspectRatio="none"><polyline points="0,10 10,13 20,9 30,15 40,11 50,16 60,10 70,13 80,8 90,12 100,7" fill="none" stroke="#f5a524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+                <span class="stat-trend up">—</span>
+              </div>
+              <div class="stat-card-label">O'RTACHA KO'RISH VAQTI</div>
+              <div class="stat-card-value" id="stat-watchtime">—</div>
+              <div class="sparkline sl-purple"><svg class="sparkline-svg" viewBox="0 0 100 24" preserveAspectRatio="none"><polyline points="0,16 10,12 20,14 30,8 40,11 50,7 60,10 70,5 80,8 90,3 100,6" fill="none" stroke="#7c6cf5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon icon-cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span>
+                <span class="stat-trend up" id="stat-storage-trend">—</span>
+              </div>
+              <div class="stat-card-label">SAQLASH ISHLATILDI</div>
+              <div class="stat-card-value" id="stat-storage">0 GB / 750 GB</div>
+              <div class="sparkline sl-cyan"><svg class="sparkline-svg" viewBox="0 0 100 24" preserveAspectRatio="none"><polyline points="0,19 10,15 20,17 30,11 40,13 50,7 60,10 70,5 80,9 90,4 100,8" fill="none" stroke="#22b8cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top">
+                <span class="stat-icon icon-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg></span>
+                <span class="stat-trend up" id="stat-uploaded-trend">—</span>
+              </div>
+              <div class="stat-card-label">YUKLANGAN VIDEOLAR</div>
+              <div class="stat-card-value" id="stat-uploaded">0</div>
+              <div class="sparkline sl-yellow"><svg class="sparkline-svg" viewBox="0 0 100 24" preserveAspectRatio="none"><polyline points="0,12 10,15 20,10 30,14 40,8 50,12 60,6 70,10 80,5 90,9 100,4" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+
+            <aside class="rack">
+              <div class="rack-head">
+                <div class="rack-label">KANALLAR (<span id="rack-count">15</span>)</div>
+                <button class="btn btn-ghost btn-small" disabled title="Keyingi bosqichda">+ Yangi kanal</button>
+              </div>
+              <div class="rack-summary" id="global-summary">15 kanal</div>
+              <div id="channel-nav" class="rack-list"></div>
+            </aside>
+
+            <main class="deck">
+
+              <div class="nameplate">
+                <div class="nameplate-avatar" id="active-channel-avatar">01</div>
+                <div class="nameplate-info">
+                  <div class="nameplate-name-row">
+                    <h1 id="active-channel-name">Kanal 1</h1>
+                    <span class="tally" id="live-indicator"><span class="tally-dot"></span><span id="live-indicator-text">Efirda emas</span></span>
+                  </div>
+                  <div class="nameplate-sub">
+                    <span><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13" style="vertical-align:-2px"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/></svg> YouTube Live</span>
+                    <span class="dot-sep">•</span>
+                    <span>Public</span>
+                    <span class="dot-sep">•</span>
+                    <span class="health-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" style="vertical-align:-2px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Stream sog'lom</span>
+                  </div>
+                </div>
+                <div class="nameplate-actions">
+                  <button class="btn btn-ghost" id="rename-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" style="vertical-align:-2px"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg> Tahrirlash</button>
+                </div>
+              </div>
+
+              <div class="deck-tabs">
+                <button class="deck-tab active" data-tab="videolar">Videolar</button>
+                <button class="deck-tab" data-tab="livestream">Live Stream</button>
+                <button class="deck-tab" data-tab="deck-analytics">Analytics</button>
+                <button class="deck-tab" data-tab="deck-playlists">Playlists</button>
+                <button class="deck-tab" data-tab="deck-settings">Sozlamalar</button>
+              </div>
+
+              <div class="tab-content active" id="tab-content-videolar">
+                <div class="modules">
+
+                  <section class="module">
+                    <div class="module-head">
+                      <span class="module-eyebrow">Xotira</span>
+                      <span class="module-meta" id="storage-label">—</span>
+                    </div>
+                    <div class="vu-meter">
+                      <div id="storage-bar" class="vu-meter-fill"></div>
+                    </div>
+                  </section>
+
+                  <section class="module">
+                    <div class="module-head">
+                      <span class="module-eyebrow">Stream key</span>
+                    </div>
+                    <div id="key-display" class="key-display" style="display:none;">
+                      <span class="key-icon">🔒</span>
+                      <span id="key-masked" class="key-masked"></span>
+                      <button id="remove-key-btn" class="btn btn-ghost btn-small">O'chirish</button>
+                    </div>
+                    <div id="key-form-row" class="add-key-row">
+                      <input type="text" id="key-input" placeholder="YouTube stream key'ni joylashtiring">
+                      <button id="save-key-btn" class="btn btn-primary btn-small">Saqlash</button>
+                    </div>
+                    <div class="module-note" id="key-note">Bu kanal uchun hali stream key kiritilmagan.</div>
+                  </section>
+
+                  <section class="module module-wide">
+                    <div class="module-head">
+                      <span class="module-eyebrow">Video yuklash</span>
+                      <span class="module-meta">Limit: 50 GB</span>
+                    </div>
+                    <div class="upload-row">
+                      <label class="file-btn">
+                        Faylni tanlang
+                        <input type="file" id="file-input" accept=".mp4,.mov,.mkv,.avi,.webm" hidden>
+                      </label>
+                      <span id="file-name" class="module-note" style="margin:0;">Fayl tanlanmagan</span>
+                      <button id="upload-btn" class="btn btn-primary">Yuklash</button>
+                    </div>
+                    <div id="upload-progress-wrap" class="vu-meter thin" style="display:none; margin-top:12px;">
+                      <div id="upload-progress" class="vu-meter-fill"></div>
+                    </div>
+                  </section>
+
+                  <section class="module module-wide">
+                    <div class="module-head">
+                      <span class="module-eyebrow">Videolar</span>
+                    </div>
+                    <div class="table-head video-table-head">
+                      <span>VIDEO NOMI</span>
+                      <span>HOLAT</span>
+                      <span>HARAKATLAR</span>
+                    </div>
+                    <div id="videos-list" class="rundown"></div>
+                    <div id="videos-empty" class="module-note" style="display:none;">Hali video yo'q. Birinchi videongizni yuklang.</div>
+                  </section>
+
+                </div>
+              </div>
+
+              <div class="tab-content" id="tab-content-livestream">
+                <div id="livestream-offline" class="empty-page empty-page-inline">
+                  <div class="empty-icon">📡</div>
+                  <h2>Efirda emas</h2>
+                  <p>Bu kanal hozir efirda emas. Efirga uzatilganda bitrate, FPS va ulanish sifati shu yerda ko'rinadi.</p>
+                </div>
+                <div id="livestream-online" class="livestream-panel" style="display:none;">
+                  <div class="ls-grid">
+                    <div class="ls-card">
+                      <div class="ls-card-label">ULANISH</div>
+                      <div class="ls-card-value" id="ls-connection">—</div>
+                    </div>
+                    <div class="ls-card">
+                      <div class="ls-card-label">BITRATE</div>
+                      <div class="ls-card-value" id="ls-bitrate">—</div>
+                    </div>
+                    <div class="ls-card">
+                      <div class="ls-card-label">FPS</div>
+                      <div class="ls-card-value" id="ls-fps">—</div>
+                    </div>
+                    <div class="ls-card">
+                      <div class="ls-card-label">DROPPED FRAMES</div>
+                      <div class="ls-card-value" id="ls-dropped">—</div>
+                    </div>
+                    <div class="ls-card">
+                      <div class="ls-card-label">SPEED</div>
+                      <div class="ls-card-value" id="ls-speed">—</div>
+                    </div>
+                    <div class="ls-card">
+                      <div class="ls-card-label">DAVOMIYLIGI</div>
+                      <div class="ls-card-value" id="ls-duration">—</div>
+                    </div>
+                  </div>
+                  <div class="module-note" id="ls-updated">—</div>
+                </div>
+              </div>
+              <div class="tab-content" id="tab-content-deck-analytics">
+                <div class="empty-page empty-page-inline"><div class="empty-icon">📊</div><h2>Analytics</h2><p>Ushbu kanal bo'yicha CTR, watch time, retention — YouTube API ulangandan so'ng.</p></div>
+              </div>
+              <div class="tab-content" id="tab-content-deck-playlists">
+                <div class="empty-page empty-page-inline"><div class="empty-icon">🎞️</div><h2>Playlists</h2><p>Ushbu kanal playlistlarini boshqarish keyingi bosqichda qo'shiladi.</p></div>
+              </div>
+              <div class="tab-content" id="tab-content-deck-settings">
+                <div class="empty-page empty-page-inline"><div class="empty-icon">⚙️</div><h2>Kanal sozlamalari</h2><p>Kanalga oid qo'shimcha sozlamalar keyingi bosqichda qo'shiladi.</p></div>
+              </div>
+
+            </main>
+          </div>
+        </section>
+
+        <!-- ============ PLACEHOLDER PAGES ============ -->
+        <section class="page" id="page-kanallar">
+          <div class="channels-toolbar">
+            <div class="channels-toolbar-info">Jami <b id="kanallar-total">15</b> kanal · <span id="kanallar-live-count">0</span> tasi efirda</div>
+            <button class="btn btn-ghost btn-small" disabled title="Keyingi bosqichda">+ Yangi kanal</button>
+          </div>
+          <div class="channels-table">
+            <div class="table-head channels-table-head">
+              <span>KANAL</span>
+              <span>HOLAT</span>
+              <span>VIDEOLAR</span>
+              <span>XOTIRA</span>
+              <span>JONLI TOMOSHA</span>
+              <span>CTR</span>
+              <span>HARAKAT</span>
+            </div>
+            <div id="kanallar-rows"></div>
+          </div>
+        </section>
+
+        <section class="page" id="page-live">
+          <div class="live-toolbar">
+            <div class="channels-toolbar-info"><span class="live-dot"></span> Hozir <b id="live-page-count">0</b> kanal efirda</div>
+          </div>
+          <div id="live-page-list" class="live-grid"></div>
+          <div id="live-page-empty" class="empty-page" style="display:none;">
+            <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-8.49a6 6 0 0 0 0 8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
+            <h2>Hozircha hech kim efirda emas</h2>
+            <p>Biror kanalni ochib, stream key va videoni tanlab, "Efirga uzatish"ni bosing.</p>
+          </div>
+        </section>
+
+        <section class="page" id="page-videolar">
+          <div class="channels-toolbar">
+            <div class="channels-toolbar-info">Barcha kanallarda jami <b id="videolar-total">0</b> ta video</div>
+            <button class="btn btn-ghost btn-small" id="videolar-refresh">↻ Yangilash</button>
+          </div>
+          <div class="channels-table">
+            <div class="table-head videolar-table-head">
+              <span>VIDEO NOMI</span>
+              <span>KANAL</span>
+              <span>HAJMI</span>
+              <span>YUKLANGAN</span>
+              <span>HOLAT</span>
+              <span>HARAKAT</span>
+            </div>
+            <div id="videolar-rows"></div>
+            <div id="videolar-empty" class="module-note" style="display:none; text-align:center; padding:24px;">Hali hech qaysi kanalda video yo'q.</div>
+          </div>
+        </section>
+
+        <section class="page" id="page-analytics">
+          <div class="empty-page">
+            <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+            <h2>Analytics</h2>
+            <p>Views, CTR, watch time, retention va daromad statistikalari — YouTube API ulangandan so'ng ishlaydi.</p>
+          </div>
+        </section>
+
+        <section class="page" id="page-playlistlar">
+          <div class="empty-page">
+            <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+            <h2>Playlistlar</h2>
+            <p>Kanallar bo'yicha playlistlarni boshqarish sahifasi.</p>
+          </div>
+        </section>
+
+        <section class="page" id="page-saqlash">
+          <div class="stats-row stats-row-4">
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-icon icon-cyan">${"" }<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span></div>
+              <div class="stat-card-label">JAMI ISHLATILGAN</div>
+              <div class="stat-card-value" id="saqlash-total-used">0 GB</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-icon icon-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span></div>
+              <div class="stat-card-label">JAMI LIMIT</div>
+              <div class="stat-card-value" id="saqlash-total-limit">750 GB</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-icon icon-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span></div>
+              <div class="stat-card-label">ENG KO'P ISHLATGAN KANAL</div>
+              <div class="stat-card-value" id="saqlash-top-channel">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-top"><span class="stat-icon icon-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></span></div>
+              <div class="stat-card-label">JAMI VIDEOLAR</div>
+              <div class="stat-card-value" id="saqlash-total-videos">0</div>
+            </div>
+          </div>
+          <div class="channels-table">
+            <div class="table-head saqlash-table-head">
+              <span>KANAL</span>
+              <span>ISHLATILGAN</span>
+              <span>FOIZ</span>
+              <span>VIDEOLAR</span>
+            </div>
+            <div id="saqlash-rows"></div>
+          </div>
+        </section>
+
+        <section class="page" id="page-daromad">
+          <div class="empty-page">
+            <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <h2>Daromad</h2>
+            <p>Monetizatsiya yoqilgan kanallar bo'yicha daromad hisobotlari.</p>
+          </div>
+        </section>
+
+        <section class="page" id="page-sozlamalar">
+          <div class="settings-grid">
+            <div class="module">
+              <div class="module-head"><span class="module-eyebrow">Ko'rinish</span></div>
+              <div class="settings-row"><span>Dark Mode</span><label class="switch"><input type="checkbox" checked disabled><span class="switch-track"></span></label></div>
+              <div class="settings-row"><span>Til</span><select disabled><option>O'zbekcha</option><option>Русский</option><option>English</option></select></div>
+              <div class="settings-row"><span>Timezone</span><select disabled><option>Asia/Tashkent (UTC+5)</option></select></div>
+            </div>
+            <div class="module">
+              <div class="module-head"><span class="module-eyebrow">Limitlar</span></div>
+              <div class="settings-row"><span>Kanal boshiga Upload limit</span><span class="module-meta">50 GB</span></div>
+              <div class="settings-row"><span>Jami Storage limit</span><span class="module-meta">750 GB</span></div>
+              <div class="settings-row"><span>Auto Delete (eski videolar)</span><label class="switch"><input type="checkbox" disabled><span class="switch-track"></span></label></div>
+              <div class="settings-row"><span>Auto Backup</span><label class="switch"><input type="checkbox" disabled><span class="switch-track"></span></label></div>
+            </div>
+            <div class="module module-wide">
+              <div class="module-head"><span class="module-eyebrow">API Sozlamalari</span><span class="module-meta">Ulanmagan</span></div>
+              <div class="module-note">YouTube Data API kaliti va OAuth ulanishi keyingi bosqichda qo'shiladi. Hozircha stream key orqali RTMP uzatish ishlaydi, ammo YouTube'dan statistika o'qish uchun bu qadam kerak bo'ladi.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-foydalanuvchilar">
+          <div class="empty-page">
+            <div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h2>Foydalanuvchilar</h2>
+            <p>Admin va operatorlarni boshqarish sahifasi.</p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
